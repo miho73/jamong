@@ -6,6 +6,10 @@ const session = require('express-session');
 const favicon = require('serve-favicon');
 const https = require('https');
 const fs = require('fs');
+const pg = require('pg');
+
+const auth = require('./modules/auth');
+const classmgr = require('./modules/class_manage');
 
 const HTTP_PORT = 8800
 const HTTPS_PORT = 4400

@@ -4,12 +4,57 @@
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 
-h1 {
+h1,h2,h3,span,p {
     color: #fff;
-    font-size: 3em;
-    text-align: center;
 }
 
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 1em;
+}
+
+h3.room-title {
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+}
+span.room-msg {
+    font-size: 1.3em;
+}
+
+
 body {
-    background-color: #000;
+    background-color: #151515;
+    padding: 0 5%;
+    margin: 0;
+}
+
+div#room-selection {
+    width: 70%;
+    margin-left: 15%;
+}
+a.a-room {
+    margin-bottom: 15px;
+    display: block;
+}
+div.room {
+    border-radius: 10px;
+    background: #fff2;
+    padding: 10px;
+    opacity: 0.7;
+    transition: opacity .15s linear;
+    -moz-transition: opacity .15s linear;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+}
+div.room:hover {
+    opacity: 1;
+    transition: opacity .15s linear;
+    -moz-transition: opacity .15s linear;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
 }
