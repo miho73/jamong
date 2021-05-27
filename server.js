@@ -20,10 +20,12 @@ app.set("view engine", "ejs");
 app.use('/lib', express.static('./lib'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.disable('x-powered-by');
 
 app.get('/', (req, res)=>{
     res.render('main.ejs');
 });
+classmgr.class_manage_router(app);
 
 app.listen(HTTP_PORT);
 console.log("HTTP server listening on port " + HTTP_PORT);
