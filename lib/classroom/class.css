@@ -1,0 +1,99 @@
+@keyframes opac {
+    from {
+        opacity: 0.2;
+    }
+  
+    to {
+        opacity: 1;
+    }
+}
+
+p#iden-checking {
+    font-size: 3em;
+    font-weight: 200;
+    animation-duration: 0.8s;
+    animation-name: opac;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+div#req-auth {
+    padding: 20px;
+    border-radius: 15px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateY(-50%) translateX(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+h2#autht {
+    color: #111;
+    margin: 0 0 5px 0;
+    font-size: 2em;
+    font-weight: 450;
+}
+h3#authexp {
+    color: #111;
+    margin: 2px 0 2px 0;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+span#authexps {
+    color: #555;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+input#class-pwd,input#class-auth {
+    color: #111;
+    outline: none;
+    padding: 3px 6px;
+    border: 1px solid #222;
+    border-radius: 1px;
+    margin: 10px 10% 5px 9%;
+    width: 80%;
+}
+button#new-auth-confirm,button#auth-confirm {
+    margin-left: 30%;
+    margin-right: 29%;
+    width: 40%;
+    padding: 5px 10px;
+    font-size: 1.2em;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #111;
+    background-color: transparent;
+}
+span#new-code {
+    color: #111;
+    font-size: 3em;
+}
+span#ycode {
+    color: #111;
+    font-size: 1em;
+}
+span#code-exp {
+    color: #111;
+    font-size: 0.9em;
+}
+p#errorsp,p#errorspx {
+    color: #111;
+    text-align: center;
+    margin: 0;
+}
+
+/** tasks **/
+table#task {
+    color: #fff;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}  
+tr:nth-child(even) {
+    background-color: #333;
+}

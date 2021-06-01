@@ -161,6 +161,34 @@ button.type-2:disabled,input.type-2:disabled {
     color: #000;
 }
 
+button.type-3,input.type-3 {
+    outline: none;
+    border: 1px solid #777;
+    background-color: transparent;
+    color: #111;
+    font-size: 1.3em;
+    padding: 7px 10px;
+    border-radius: 0;
+}
+/*
+button.type-3:hover,input.type-3:hover {
+    
+}
+button.type-3:active,input.type-3:active {
+    
+}
+button.type-3:disabled,input.type-3:disabled {
+    
+}
+*/
+
+*.btn-trans {
+    transition: background-color .15s linear;
+    -moz-transition: background-color .15s linear;
+    -webkit-transition: background-color .15s linear;
+    -o-transition: background-color .15s linear;
+}
+
 /* animation css */
 *.bg-trans {
     transition: background-color .15s linear;

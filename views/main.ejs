@@ -4,18 +4,13 @@
     <head>
         <title>자몽 - 메인</title>
         <link rel="stylesheet" href="/lib/univ.css">
-        <script src="/lib/main/main.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="/lib/main/main.js"></script>
     </head>
     <body onload="loader()">
         <h1>과제방 선택</h1>
         <div id="room-selection">
-            <a class="a-room" href="https://google.com">
-                <div class="room">
-                    <h3 class="room-title">와.이.즈.만</h3>
-                    <span class="room-msg">송도 와.이.즈.만 2B 과제방</span>
-                </div>
-            </a>
+            <div id="room-region"></div>
             <div class="room-free" style="text-align: center; margin-bottom: 10px;">
                 <div style="display: inline-block; width: 60%; margin-bottom: 10px;">
                     <input type="text" id="searchq" style="margin: 0; border-radius: 7px 0 0 7px;">
@@ -30,54 +25,4 @@
             </div>
         </div>
     </body>
-    <script>
-        function search() {
-            const toAdd = document.getElementById('search-res');
-            toAdd.style.transform = 'scaleY(0)';
-            setTimeout(()=>{
-                $.ajax({
-                    url: '/find',
-                    method: 'POST',
-                    data: {
-                        name: document.getElementById('searchq').value
-                    },
-                    cache: false,
-                    success: function(data) {
-                        const rows = data.data;
-                        toAdd.innerHTML = "";
-                        if(rows.length == 0){
-                            const h3 = document.createElement('h3');
-                            h3.classList.add('room-title');
-                            h3.innerText = "Nothing was found";
-                            h3.style.textAlign = 'center';
-                            toAdd.appendChild(h3);
-                            toAdd.style.transform = 'scaleY(1)';
-                            return;
-                        }
-                        rows.forEach(ele => {
-                            const aRoot = document.createElement('a');
-                            const rdiv = document.createElement('div');
-                            const h3 = document.createElement('h3');
-                            const greet = document.createElement('span');
-                            h3.classList.add('room-title');
-                            h3.innerText = ele.class_name;
-                            greet.innerText = ele.class_greeting;
-                            greet.classList.add('room-msg');
-                            aRoot.classList.add('a-room');
-                            rdiv.classList.add('room');
-                            aRoot.appendChild(rdiv);
-                            aRoot.onclick = function() {addHref(ele.code, ele.class_name)};
-                            rdiv.appendChild(h3);
-                            rdiv.appendChild(greet);
-                            toAdd.appendChild(aRoot);
-                        });
-                        toAdd.style.transform = 'scaleY(1)';
-                    },
-                    error: function(err) {
-                        document.getElementById('search-error-display').innerText = err.statusText;
-                    },
-                });
-            }, 300);
-        }
-    </script>
 </html>

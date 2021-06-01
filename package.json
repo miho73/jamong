@@ -4,8 +4,8 @@
   "description": "jamong homework manage",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js",
-    "start": "node server.js"
+    "test": "node --inspect --trace-warnings server.js",
+    "start": "node --inspect --trace-warnings server.js"
   },
   "repository": {
     "type": "git",
