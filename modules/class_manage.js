@@ -75,7 +75,6 @@ module.exports = {
                             ClinfDb.query(`CREATE TABLE IF NOT EXISTS h${code}(`+
                                           `code BIGSERIAL NOT NULL PRIMARY KEY,`+
                                           `content TEXT NOT NULL,`+
-                                          `completes TEXT NOT NULL,`+
                                           `expires TEXT NOT NULL)`, (err4)=>{
                                 if(err4) {
                                     ClassDb.query('ROLLBACK', (errr)=>{if(errr){console.log('class_manage: /class/new DB transaction rollback failure: '+errr)};});
@@ -121,7 +120,7 @@ module.exports = {
                                     res.status(500).render('result.ejs', {msg: "DB 오류. 그룹을 만들 수 없습니다."});
                                 }
                                 else {
-                                    preparePromise().then((res)=>{
+                                    preparePromise().then(()=>{
                                         res.render('result.ejs', {msg: "그룹이 생성되었습니다."});
                                     }, (err)=>{
                                         console.log(err);

@@ -91,13 +91,17 @@ label.required::after {
     font-size: 0.9em;
 }
 input {
-    background-color: #fff3;
+    background-color: #444;
     outline: none;
     border: 2px solid #666;
     border-radius: 7px;
     padding: 7px 10px;
     font-size: 1em;
     margin-bottom: 15px;
+}
+input[type=submit] {
+    -webkit-appearance: none;
+    cursor: pointer;
 }
 input:hover {
     border: 2px solid #757575;
@@ -170,17 +174,6 @@ button.type-3,input.type-3 {
     padding: 7px 10px;
     border-radius: 0;
 }
-/*
-button.type-3:hover,input.type-3:hover {
-    
-}
-button.type-3:active,input.type-3:active {
-    
-}
-button.type-3:disabled,input.type-3:disabled {
-    
-}
-*/
 
 *.btn-trans {
     transition: background-color .15s linear;

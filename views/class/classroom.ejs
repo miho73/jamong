@@ -48,7 +48,7 @@
         <div id="realworld" style="display: none; margin-top: 1%;">
             <h1 style="margin-bottom: 0;"><%=cname%></h1>
             <span id="user-name-region" style="font-size: 1.2em; margin-top: 0; margin-right: 15px;"></span>
-            <span id="user-id" style="font-size: 1.2em; margin-top: 0; font-family: monospace;"></span>
+            <span id="user-id" style="font-size: 1.2em; margin-top: 0;"></span>
             <hr style="color: #eee; margin: 7px 0;">
             <div id="tasks" class="table table-striped table-bordered clickable-table">
                 <table id="task">
@@ -60,22 +60,36 @@
                             <th style="width: 5%;">상태</th>
                         </tr>
                     </thead>
-                    <tbody id="taskhere">
-                        <tr>
-                            <td>1</td>
-                            <td>역사 공부</td>
-                            <td>2020/02/16</td>
-                            <td>DONE</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>역사 공부</td>
-                            <td>2020/02/16</td>
-                            <td>DONE</td>
-                        </tr>
-                    </tbody>
+                    <tbody id="taskhere"></tbody>
+                    <tr id="add-task-region" style="display: none;">
+                        <td colspan="4" id="add-task">
+                            <form method="POST" style="text-align: center;" action="/class/treg">
+                                <div style="display: inline-block; width: 100%;">
+                                    <label class="add-task">과제 내용 : </label>
+                                    <input type="text" id="add-task-name" required spellcheck="false">
+                                    <label class="add-task">기한 : </label>
+                                    <div class="radio-set">
+                                        <input type="radio" id="exp-day" value="day" name="expi">
+                                        <label for="exp-day" class="radio-label">내일까지</label>
+                                    </div>
+                                    <div class="radio-set">
+                                        <input type="radio" id="exp-week" value="week" name="expi" checked>
+                                        <label for="exp-week" class="radio-label">다음주 까지</label>
+                                    </div>
+                                    <div class="radio-set">
+                                        <input type="radio" id="exp-3week" value="3week" name="expi">
+                                        <label for="exp-3week" class="radio-label">3주 까지</label>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <input type="button" id="task-add" value="등록" style="display: inline;" onclick="iSubmit()">
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
                 </table>
             </div>
         </div>
+        <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
     </body>
 </html>
