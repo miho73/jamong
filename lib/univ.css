@@ -20,9 +20,16 @@ h1 {
 
 body {
     background-color: #151515;
-    padding: 0 5%;
+    padding: 0 25%;
     margin: 0 0 15px 0;
     animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    body{
+        padding: 0 5%;
+    }
 }
 
 @keyframes slideInFromLeft {
@@ -43,8 +50,6 @@ span.room-msg {
 }
 
 div#room-selection {
-    width: 70%;
-    margin-left: 15%;
 }
 a.a-room {
     margin-bottom: 15px;

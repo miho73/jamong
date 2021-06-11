@@ -190,7 +190,7 @@ module.exports = {
             }
             let authed = function() {
                 return new Promise(function(resolve, reject) {
-                    cmanage.clinfDbQuery(`SELECT * FROM h${code} ORDER BY expires DESC LIMIT $1`, [len], (err, ress)=>{
+                    cmanage.clinfDbQuery(`SELECT * FROM h${code} ORDER BY expires ASC LIMIT $1`, [len], (err, ress)=>{
                         if(err) {
                             res.status(500).send('db');
                             console.log('class_control: /class/hws get task list query failure: '+err);

@@ -10,7 +10,7 @@
     </head>
     <body onload="loader(<%=code%>, <%=cpwd%>)">
         <div id="goback" style="display: none;">
-            <a style="margin-top: 10px; display: inline-block; font-size: 1.2em; margin-left: -5%;" href="/">그룹 선택 화면</a>
+            <a style="font-size: 1.2em; position: absolute; left: 10px; top: 5px;" href="/">그룹 선택 화면</a>
         </div>
         <div id="identity-checker" style="text-align: center;">
             <p id="iden-checking">Checking your identity</p>
@@ -54,10 +54,10 @@
                 <table id="task">
                     <thead>
                         <tr>
-                            <th style="width: 5%;">번호</th>
-                            <th style="width: 70%;">내용</th>
+                            <th style="width: 7%;">번호</th>
+                            <th style="width: 65%;">내용</th>
                             <th style="width: 20%;">기한</th>
-                            <th style="width: 5%;">상태</th>
+                            <th style="width: 8%;">상태</th>
                         </tr>
                     </thead>
                     <tbody id="taskhere"></tbody>
@@ -89,7 +89,7 @@
                     </tr>
                 </table>
             </div>
+            <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
         </div>
-        <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
     </body>
 </html>

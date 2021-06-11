@@ -78,12 +78,16 @@ td.td-fin {
     font-weight: 350;
     text-align: center;
     text-shadow: 2px 2px 7px rgb(111, 247, 111);
+    cursor: pointer;
+    user-select: none;
 }
 td.td-nfin {
     color: rgb(236, 87, 42);
     font-weight: 350;
     text-align: center;
     text-shadow: 2px 2px 7px rgb(255, 73, 18);
+    cursor: pointer;
+    user-select: none;
 }
 div.radio-set {
     display: inline;
