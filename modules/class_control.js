@@ -46,6 +46,10 @@ module.exports = {
                     res.sendStatus(500);
                     return;
                 }
+                else if(res1.rowCount == 0) {
+                    res.status(401).send('no-iden');
+                    return;
+                }
                 res.send(JSON.stringify({
                     un: res1.rows[0].name,
                     uid: res1.rows[0].uid
@@ -67,7 +71,7 @@ module.exports = {
                 let row = db1.rows;
                 if(row[0].class_has_pwd == false) {
                     const codec = randomString(5);
-                    cmanage.clinfDbQuery(`INSERT INTO u${code} (name, uid) VALUES ('', $1)`, [codec], (err3)=>{
+                    cmanage.clinfDbQuery(`INSERT INTO u${code} (name, uid, not_done) VALUES ('', $1, '')`, [codec], (err3)=>{
                         if(err3) {
                             console.log('class_control: /class/new-iden user insert failure: '+err3);
                             res.sendStatus(500);
@@ -116,7 +120,7 @@ module.exports = {
                     return;
                 }
                 else if(res1.rowCount == 0) {
-                    res.sendStatus(401);
+                    res.status(401).send('no-iden');
                     return;
                 }
                 if(res1.rowCount == 1) {
@@ -151,15 +155,34 @@ module.exports = {
                             return;
                     }
                     exp = exp-exp%86400+86399;
+                    cmanage.clinfDbQuery(`BEGIN`);
                     cmanage.clinfDbQuery(`INSERT INTO h${code} (content, expires) VALUES ($1, $2)`, [sanitizeHtml(req.body.cont), exp], (err1)=>{
                         if(err1) {
                             res.status(500).send('db');
                             reject('class_control: /class/treg db error: '+err1);
+                            cmanage.clinfDbQuery('ROLLBACK');
                             return;
                         }
                         else {
-                            res.status(200).send('added');
-                            resolve();
+                            cmanage.clinfDbQuery(`SELECT code FROM h${code} ORDER BY code DESC LIMIT 1`, [], (err5, res5)=>{
+                                if(err5 || res5.rowCount != 1) {
+                                    res.status(500).send('db');
+                                    reject('class_control: /class/treg get added hw code: '+err5);
+                                    cmanage.clinfDbQuery('ROLLBACK');
+                                    return; 
+                                }
+                                cmanage.clinfDbQuery(`UPDATE u${code} SET not_done = CONCAT(not_done, '${res5.rows[0].code};')`, [], (err2)=>{
+                                    if(err2) {
+                                        res.status(500).send('db');
+                                        reject('class_control: /class/treg user not_done modify error: '+err2);
+                                        cmanage.clinfDbQuery('ROLLBACK');
+                                        return;
+                                    }
+                                    res.status(200).send('added');
+                                    cmanage.clinfDbQuery('COMMIT');
+                                    resolve();
+                                });
+                            });
                         }
                     });
                 });
@@ -171,7 +194,7 @@ module.exports = {
                     return
                 }
                 else if(res1.rowCount == 0) {
-                    res.sendStatus(401);
+                    res.status(401).send('no-iden');
                     return
                 }
                 else if(res1.rowCount == 1) {
@@ -196,8 +219,22 @@ module.exports = {
                             console.log('class_control: /class/hws get task list query failure: '+err);
                             return;
                         }
-                        res.send(JSON.stringify(ress.rows));
-                        resolve();
+                        cmanage.clinfDbQuery(`SELECT * FROM u${code} WHERE uid=$1`, [codex], (err2, resx)=>{
+                            if(err2) {
+                                res.status(500).send('db');
+                                console.log('class_control: /class/hws get not_done list query failure: '+err2);
+                                return;
+                            }
+                            else if (resx.rowCount == 0) {
+                                res.status(401).send('no-iden');
+                                return;
+                            }
+                            res.send(JSON.stringify({
+                                hws: ress.rows,
+                                uc: resx.rows[0].not_done
+                            }));
+                            resolve();
+                        });
                     });
                 });
             };
@@ -208,7 +245,7 @@ module.exports = {
                     return
                 }
                 else if(res1.rowCount == 0) {
-                    res.sendStatus(401);
+                    res.status(401).send('no-iden');
                     return
                 }
                 else if(res1.rowCount == 1) {
@@ -219,5 +256,20 @@ module.exports = {
                 else res.sendStatus(500);
             });
         });
+        app.post('/class/clear', (req, res)=>{
+            let code = req.body.code, codex = req.body.uid;
+            if(!number.test(code) || code=='' || code == undefined || codex == undefined || codex.length != 5 || req.body.stat == undefined) {
+                res.sendStatus(400);
+                return;
+            }
+            cmanage.clinfDbQuery(`UPDATE u${code} SET not_done=$1 WHERE uid=$2`, [req.body.stat, codex], (err1)=>{
+                if(err1) {
+                    console.log('class_control: /class/clear change status failrue: '+err1);
+                    res.status(500).send("처리 실패");
+                    return;
+                }
+                res.sendStatus(200);
+            });
+        })
     }
 }

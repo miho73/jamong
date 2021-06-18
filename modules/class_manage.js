@@ -65,7 +65,7 @@ module.exports = {
                                       'code BIGSERIAL NOT NULL PRIMARY KEY,'+
                                       'name TEXT NOT NULL,'+
                                       'uid TEXT NOT NULL UNIQUE,'+
-                                      'not_done TEXT)', (err3)=>{
+                                      'not_done NOT NULL TEXT)', (err3)=>{
                             if(err3) {
                                 ClassDb.query('ROLLBACK', (errr)=>{if(errr){console.log('class_manage: /class/new DB transaction rollback failure: '+errr)};});
                                 res.status(500).render('result.ejs', {msg: "DB 오류, 그룹을 준비할 수 없습니다."});
