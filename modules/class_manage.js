@@ -51,7 +51,7 @@ module.exports = {
             if(pwd == undefined) pwd = '';
             if(cgreet == undefined) cgreet = '';
             if(cmsg == undefined) cmsg = '';
-            const preparePromise = function(res) {
+            const preparePromise = function(resw) {
                 return new Promise(function(resolve, reject) {
                     ClassDb.query('SELECT code FROM class ORDER BY code DESC LIMIT 1;', (err2, rex2)=>{
                         if(err2) {
@@ -65,10 +65,10 @@ module.exports = {
                                       'code BIGSERIAL NOT NULL PRIMARY KEY,'+
                                       'name TEXT NOT NULL,'+
                                       'uid TEXT NOT NULL UNIQUE,'+
-                                      'not_done NOT NULL TEXT)', (err3)=>{
+                                      'not_done TEXT NOT NULL)', (err3)=>{
                             if(err3) {
                                 ClassDb.query('ROLLBACK', (errr)=>{if(errr){console.log('class_manage: /class/new DB transaction rollback failure: '+errr)};});
-                                res.status(500).render('result.ejs', {msg: "DB 오류, 그룹을 준비할 수 없습니다."});
+                                resw.status(500).render('result.ejs', {msg: "DB 오류, 그룹을 준비할 수 없습니다."});
                                 reject('class_manage: /class/new DB CREATE TABLE 1 error: '+err3);
                                 return;
                             }
@@ -78,7 +78,7 @@ module.exports = {
                                           `expires TEXT NOT NULL)`, (err4)=>{
                                 if(err4) {
                                     ClassDb.query('ROLLBACK', (errr)=>{if(errr){console.log('class_manage: /class/new DB transaction rollback failure: '+errr)};});
-                                    res.status(500).render('result.ejs', {msg: "DB 오류, 그룹을 준비할 수 없습니다."});
+                                    resw.status(500).render('result.ejs', {msg: "DB 오류, 그룹을 준비할 수 없습니다."});
                                     reject('class_manage: /class/new DB CREATE TABLE 2 error: '+err4);
                                     return;
                                 }
@@ -120,7 +120,7 @@ module.exports = {
                                     res.status(500).render('result.ejs', {msg: "DB 오류. 그룹을 만들 수 없습니다."});
                                 }
                                 else {
-                                    preparePromise().then(()=>{
+                                    preparePromise(res).then(()=>{
                                         res.render('result.ejs', {msg: "그룹이 생성되었습니다."});
                                     }, (err)=>{
                                         console.log(err);
