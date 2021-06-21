@@ -29,18 +29,23 @@ app.get('/', (req, res)=>{
 classmgr.class_manage_router(app);
 classctrl.class_ctrl_router(app);
 
+/*
 var options = {
     ca: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/fullchain.pem'),
     key: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/cert.pem')
 };
+*/
 app.listen(HTTP_PORT);
 console.log("HTTP server listening on port " + HTTP_PORT);
+/*
 https.createServer(options, app).listen(HTTPS_PORT, function() {
     console.log("HTTPS server listening on port " + HTTPS_PORT);
 });
+*/
 console.log("HTTPS server listening on port " + HTTPS_PORT);
 
+/*
 app.all('*', (req, res, next) => {
     let protocol = req.headers['x-forwarded-proto'] || req.protocol;
     if (protocol == 'https') next();
@@ -49,6 +54,7 @@ app.all('*', (req, res, next) => {
         res.redirect(to); 
     }
 });
+*/
 
 app.get('/robots.txt', (req, res)=>{
     res.sendFile(__dirname + '/lib/resources/robots.txt');
