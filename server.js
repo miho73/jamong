@@ -30,9 +30,9 @@ classmgr.class_manage_router(app);
 classctrl.class_ctrl_router(app);
 
 var options = {
-    ca: fs.readFileSync('/etc/letsencrypt/live/ipu.r-e.kr/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/ipu.r-e.kr/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/ipu.r-e.kr/cert.pem')
+    ca: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/cert.pem')
 };
 app.listen(HTTP_PORT);
 console.log("HTTP server listening on port " + HTTP_PORT);
