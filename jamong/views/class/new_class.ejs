@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>자몽 - 그룹 만들기</title>
+        <link rel="stylesheet" href="/lib/univ.css">
+    </head>
+    <body>
+        <h1>
+            <a href="/">그룹 만들기</a>
+        </h1>
+        <div style="text-align: center;">
+            <form style="display: inline-block;" method="POST">
+                <div id="grp-config">
+                    <label class="required">그룹 이름</label>
+                    <input type="text" id="cname" name="cname" spellcheck="false" required oninvalid="this.setCustomValidity('그룹 이름은 반드시 입력해야 합니다.')" autocomplete="off">
+                    <label>그룹 메시지</label>
+                    <input type="text" id="cmsg" name="cmsg" spellcheck="false" autocomplete="off">
+                    <label>그룹 환영 메시지</label>
+                    <input type="text" id="cgreet" name="cgreet" spellcheck="false" autocomplete="off">
+                </div>
+                <div id="grp-security">
+                    <label>그룹 암호</label>
+                    <input type="password" id="pwd" name="pwd" spellcheck="false" style="margin-bottom: 2px;" autocomplete="new-password">
+                    <p class="caption">빈칸으로 두면 암호가 적용되지 않습니다.</p>
+                </div>
+                <div id="control">
+                    <input type="submit" class="type-1 bg-trans" value="Create">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
