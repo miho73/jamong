@@ -186,3 +186,30 @@ and (max-device-width : 480px) {
 tr:nth-child(even) {
     background-color: #333;
 }
+div#alert-queue{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+p.alert-title,p.alert-content{
+    margin: 0;
+}
+p.alert-title {
+    color: #444;
+    font-size: 1.7em;
+    margin-bottom: 5px;
+}
+p.alert-content {
+    color: #444;
+    font-size: 1.2em;
+}
+div.alert-ok {
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #6eeb6eee;
+    transition: opacity .2s ease-in;
+}
+div.alert-error {
+    background-color: #ff8993ee !important;
+}

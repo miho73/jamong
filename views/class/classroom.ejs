@@ -96,6 +96,12 @@
                 </div>
             </div>
             <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
+            <div id="alert-queue">
+                <div id="alert-orig" class="alert-ok" style="display: none;" onclick="javascript:this.style.opacity=0;setTimeout(()=>{this.remove();},200);">
+                    <p class="alert-title"></p>
+                    <p class="alert-content"></p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
