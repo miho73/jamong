@@ -1,0 +1,18 @@
+{
+    "class":{
+        "host": "localhost",
+        "user": "jamong",
+        "password": "973245",
+        "database": "class",
+        "port": 5432,
+        "ssl": { "rejectUnauthorized": false } 
+    },
+    "clinf":{
+        "host": "localhost",
+        "user": "jamong",
+        "password": "973245",
+        "database": "clinf",
+        "port": 5432,
+        "ssl": { "rejectUnauthorized": false } 
+    }
+}

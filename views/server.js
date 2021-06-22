@@ -23,6 +23,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.disable('x-powered-by');
 
+app.get('/', (req, res)=>{
+    res.render('main.ejs');
+});
+classmgr.class_manage_router(app);
+classctrl.class_ctrl_router(app);
+
 /*
 var options = {
     ca: fs.readFileSync('/etc/letsencrypt/live/sdream.r-e.kr/fullchain.pem'),
@@ -37,23 +43,18 @@ https.createServer(options, app).listen(HTTPS_PORT, function() {
     console.log("HTTPS server listening on port " + HTTPS_PORT);
 });
 */
+console.log("HTTPS server listening on port " + HTTPS_PORT);
 
 /*
 app.all('*', (req, res, next) => {
     let protocol = req.headers['x-forwarded-proto'] || req.protocol;
     if (protocol == 'https') next();
     else { let from = `${protocol}://${req.hostname}${req.url}`; 
-        let to = `https://sdream.r-e.kr`;
+        let to = `https://${req.hostname}${req.url}`;
         res.redirect(to); 
     }
 });
 */
-
-app.get('/', (req, res)=>{
-    res.render('main.ejs');
-});
-classmgr.class_manage_router(app);
-classctrl.class_ctrl_router(app);
 
 app.get('/robots.txt', (req, res)=>{
     res.sendFile(__dirname + '/lib/resources/robots.txt');

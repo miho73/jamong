@@ -1,0 +1,11 @@
+User-agent: Googlebot
+Allow: /
+Disallow: /class/new
+
+User-agent: Yeti
+Allow: /
+Disallow: /class/new
+
+User-agent: *
+Allow: /
+Disallow: /class/new
