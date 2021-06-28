@@ -2,6 +2,8 @@
 
 ## 자몽은 여러분의 숙제관리를 도와드립니다.
 
+[![Node.js CI](https://github.com/miho73/jamong/actions/workflows/node.js.yml/badge.svg)](https://github.com/miho73/jamong/actions/workflows/node.js.yml)
+
 ## 1. PSQL Guide
 
 자몽은 PostgreSQL을 DBMS로 사용합니다. 여기서는 데이터베이스 구조에 대해 설명합니다.
