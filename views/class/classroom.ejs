@@ -48,8 +48,15 @@
         </div>
         <div id="realworld" style="display: none; margin-top: 1%;">
             <h1 style="margin-bottom: 0;"><%=cname%></h1>
-            <span id="user-name-region" style="font-size: 1.2em; margin-top: 0; margin-right: 15px;"></span>
-            <span id="user-id" style="font-size: 1.2em; margin-top: 0;"></span>
+            <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                <div>
+                    <span id="user-name-region" style="font-size: 1.2em; margin-top: 0;"></span>
+                    <span id="user-id" style="font-size: 1.2em; margin-top: 0; margin-left: 15px;"></span>
+                </div>
+                <div>
+                    <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
+                </div>
+            </div>
             <hr style="color: #eee; margin: 7px 0;">
             <div id="tasks" class="table table-striped table-bordered clickable-table">
                 <table id="task">
@@ -96,7 +103,6 @@
                     </div>
                 </div>
             </div>
-            <button onclick="openAddTask()" id="add-task-trigger"> 과제 추가</button>
             <div id="alert-queue">
                 <div id="alert-orig" class="alert-ok" style="display: none;" onclick="javascript:this.style.opacity=0;setTimeout(()=>{this.remove();},200);">
                     <p class="alert-title"></p>

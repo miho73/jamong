@@ -116,9 +116,6 @@ input[type=radio] {
     border: 1px solid #555;
 }
 button#add-task-trigger {
-    position: absolute;
-    left: 5px;
-    bottom: 10px;
     background-color: transparent;
     border: none;
     outline: none;
