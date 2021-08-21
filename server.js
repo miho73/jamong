@@ -52,6 +52,9 @@ app.all('*', (req, res, next) => {
 app.get('/', (req, res)=>{
     res.render('main.ejs');
 });
+app.get('/calc', (req, res)=>{
+    res.render('date_calc.ejs');
+})
 classmgr.class_manage_router(app);
 classctrl.class_ctrl_router(app);
 

@@ -142,23 +142,23 @@ module.exports = {
             }
             let authed = function() {
                 return new Promise(function(resolve, reject) {
-                    let exp = Math.round(Date.now()/1000);
+                    const today = Math.floor((Date.now()-(new Date('2021-01-01T00:00:00').getTime()))/1000/86400);
+                    let exp;
                     switch(req.body.expi) {
                         case "day":
-                            exp+=86400;
+                            exp=today+1;
                             break;
                         case "week":
-                            exp+=604800;
+                            exp=today+7;
                             break;
                         case "3week":
-                            exp+=1814400;
+                            exp=today+21;
                             break;
                         default:
                             res.status(400).send('expire');
                             reject('class_control: /class/treg unknown expire date');
                             return;
                     }
-                    exp = exp-exp%86400+86399;
                     cmanage.clinfDbQuery(`BEGIN`);
                     cmanage.clinfDbQuery(`INSERT INTO h${code} (content, expires) VALUES ($1, $2)`, [sanitizeHtml(probCont), exp], (err1)=>{
                         if(err1) {

@@ -104,6 +104,15 @@ input {
     font-size: 1em;
     margin-bottom: 15px;
 }
+input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 input[type=submit] {
     -webkit-appearance: none;
     cursor: pointer;

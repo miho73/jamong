@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+    <head>
+        <title>자몽 - 자몽일 계산</title>
+        <%-include('header.ejs')%>
+        <link rel="stylesheet" href="/lib/univ.css">
+    </head>
+    <body onload="init()">
+        <h1 id="today"></h1>
+        <div>
+            <input type="number" id="yrs" placeholder="yyyy" onkeyup="update()">
+            <label>년</label>
+            <input type="number" id="mon" placeholder="mm" onkeyup="update()">
+            <label>월</label>
+            <input type="number" id="dat" placeholder="dd" onkeyup="update()">
+            <label>일</label>
+            <br>
+            <p id="jday" style="font-size: 2em"></p>
+        </div>
+    </body>
+    <style>
+        label {
+            display: inline;
+            margin: 0 10px 0 2px
+        }
+        input {
+            max-width: 7%;
+            font-size: 1.3em;
+        }
+    </style>
+    <script>
+        const today = Math.floor((Date.now()-(new Date('2021-01-01T00:00:00').getTime()))/1000/86400);
+        function init() {
+            document.getElementById('today').innerText = `자몽일로 오늘은 ${today}일입니다.`
+        }
+        function update() {
+            let yrs = document.getElementById('yrs').value;
+            let mon = document.getElementById('mon').value; mon=mon.length>1?mon:'0'+mon;
+            let dat = document.getElementById('dat').value; dat=dat.length>1?dat:'0'+dat;
+            let date = new Date(`${yrs}-${mon}-${dat}T00:00:00`);
+            let t = Math.floor((date-(new Date('2021-01-01T00:00:00').getTime()))/1000/86400);
+            document.getElementById('jday').innerText = (`= ${t}일`);
+        }
+    </script>
+</html>
