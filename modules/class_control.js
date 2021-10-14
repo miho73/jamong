@@ -152,7 +152,7 @@ module.exports = {
                             exp=today+7;
                             break;
                         case "3week":
-                            exp=today+21;
+                            exp=today+14;
                             break;
                         default:
                             res.status(400).send('expire');
