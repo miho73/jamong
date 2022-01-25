@@ -317,5 +317,76 @@ module.exports = {
                 else res.sendStatus(500);
             });
         });
+        app.post('/api/homework/post', (req, res)=>{
+            let content = req.body.content;
+            let expires = req.body.expires;
+            let codex = req.body.token;
+            let code = req.body['user-code'];
+            res.setHeader('Content-Type', 'application/json');
+            if(codex == undefined || codex.length != 5) {
+                res.status(403).send('{"status":403,"message":"no access code was given"}');
+                return;
+            }
+            if(!number.test(code) || code == '') {
+                res.status(403).send('{"status":400,"message":"invalide code type"}');
+                return;
+            }
+            if(content == undefined || content == '') {
+                res.status(400).send('{"status":400,"message":"content is blank"}');
+                return;
+            }
+            let authed = function() {
+                return new Promise(function(resolve, reject) {
+                    const exp = Math.floor((new Date(expires)-(new Date('2021-01-01T00:00:00').getTime()))/1000/86400);
+                    cmanage.clinfDbQuery(`BEGIN`);
+                    cmanage.clinfDbQuery(`INSERT INTO h${code} (content, expires) VALUES ($1, $2)`, [sanitizeHtml(content), exp], (err1)=>{
+                        if(err1) {
+                            res.status(500).send('{"status":500,"database error"}');
+                            reject('class_control: /api/homework/post db error: '+err1);
+                            cmanage.clinfDbQuery('ROLLBACK');
+                            return;
+                        }
+                        else {
+                            cmanage.clinfDbQuery(`SELECT code FROM h${code} ORDER BY code DESC LIMIT 1`, [], (err5, res5)=>{
+                                if(err5 || res5.rowCount != 1) {
+                                    res.status(500).send('{"status":500,"database error"}');
+                                    reject('class_control: /api/homework/post get added hw code: '+err5);
+                                    cmanage.clinfDbQuery('ROLLBACK');
+                                    return; 
+                                }
+                                cmanage.clinfDbQuery(`UPDATE u${code} SET not_done = CONCAT(not_done, ';${res5.rows[0].code}')`, [], (err2)=>{
+                                    if(err2) {
+                                        res.status(500).send('{"status":500,"database error"}');
+                                        reject('class_control: /api/homework/post user not_done modify error: '+err2);
+                                        cmanage.clinfDbQuery('ROLLBACK');
+                                        return;
+                                    }
+                                    res.status(200).send('{"status":201,"added"}');
+                                    cmanage.clinfDbQuery('COMMIT');
+                                    resolve();
+                                });
+                            });
+                        }
+                    });
+                });
+            };
+            cmanage.clinfDbQuery(`SELECT uid FROM u${code} WHERE uid=$1`, [codex], (err1, res1)=>{
+                if(err1) {
+                    console.log('class_control: /api/homework/post select user auth query failure: '+err1);
+                    res.sendStatus(500);
+                    return
+                }
+                else if(res1.rowCount == 0) {
+                    res.status(500).send('{"status":403,"unauthenticated token"}');
+                    return
+                }
+                else if(res1.rowCount == 1) {
+                    authed().then(()=>{},(err)=>{
+                        console.log(err);
+                    });
+                }
+                else res.sendStatus(500);
+            });
+        });
     }
 }
